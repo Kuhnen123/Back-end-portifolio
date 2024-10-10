@@ -32,7 +32,7 @@ let cartoes = [
 
 
 app.get('/cartoes', (req, res) => {
-    res.status(200).json(cartoes);
+    res.status(200).json({cartoes});
 });
 
 
