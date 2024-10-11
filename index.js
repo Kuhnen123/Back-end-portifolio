@@ -33,39 +33,34 @@ let cartoes = [
 
 app.get('/cartoes', (req, res) => {
     res.status(200).json({cartoes});
+    console.log('oi');
 });
 
 
 app.post('/cartoes', (req, res) => {
     const novoCartao = req.body;
     cartoes.push(novoCartao);
-    res.status(201).json({ mensagem: 'Cartão adicionado com sucesso!', cartoes });
+    console.log(cartoes);
+    res.status(201).json({ mensagem: 'sera que deu boa o POST?', cartoes });
+});
+app.delete('/cartoes', (req, res) => {
+    const {cartoes} = req.body;
+    cartoes.splice( cartoes,1);
+    console.log(cartoes+"deletado");
+    res.status(201).json({ mensagem: 'sera que deu boa o DELET?', cartoes });
+})
+
+
+app.put('/cartoes', (req, res) => {
+//    const numero = req.body.numero;
+//    const mensagem = req.body.mensagem;
+//    const [numero].mensagem = mensagem;
+//    console.log(vetor);
+//    res.status(200).json({ mensagem: 'deu boa o PUT'});
 });
 
 
-app.put('/cartoes/:index', (req, res) => {
-    const index = req.params.index;
-    const cartaoAtualizado = req.body;
 
-    if (cartoes[index]) {
-        cartoes[index] = cartaoAtualizado;
-        res.status(200).json({ mensagem: 'Cartão atualizado com sucesso!', cartoes });
-    } else {
-        res.status(404).json({ mensagem: 'Cartão não encontrado!' });
-    }
-});
-
-
-app.delete('/cartoes/:index', (req, res) => {
-    const index = req.params.index;
-
-    if (cartoes[index]) {
-        cartoes.splice(index, 1);
-        res.status(200).json({ mensagem: 'Cartão deletado com sucesso!', cartoes });
-    } else {
-        res.status(404).json({ mensagem: 'Cartão não encontrado!' });
-    }
-});
 
 
 app.get('/', (req, res) => {
