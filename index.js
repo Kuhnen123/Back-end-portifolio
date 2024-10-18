@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 let cartoes = [
-    { nome: 'CARTAO 1', valor: 'R$80,90', img: 'c:\Users\mariana.6929\Documents\Potifolio\portifolio\assets\img\borboleta_1.png' },
+    { nome: 'CARTAO 1', valor: 'R$80,90', img: 'https://static.vecteezy.com/system/resources/thumbnails/035/999/208/small/ai-generated-purple-violet-beautiful-butterfly-drawing-watercolor-clip-art-illustration-png.png' },
     { nome: 'CARTAO 2', valor: 'R$84,67', img: 'https://static.vecteezy.com/system/resources/thumbnails/035/999/208/small/ai-generated-purple-violet-beautiful-butterfly-drawing-watercolor-clip-art-illustration-png.png' },
     { nome: 'CARTAO 3', valor: 'R$71,90', img: 'https://static.vecteezy.com/system/resources/thumbnails/049/092/962/small/blue-butterfly-with-detailed-wings-isolated-transparent-png.png' },
     { nome: 'CARTAO 4', valor: 'R$88,67', img: 'https://png.pngtree.com/png-clipart/20230929/original/pngtree-watercolor-purple-butterfly-png-image_13017931.png' },
