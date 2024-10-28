@@ -42,9 +42,11 @@ app.use(express.json());
 app.get('/cartoes', async (req, res) => { 
     try {
         const response = await db.collection('cartoes').get();
-        const cartoes = response.docs.map(doc => doc.data({
-            id: doc.id, ...doc.data()
+        const cartoes = response.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
         }));
+        
         console.log(cartoes);
         res.status(200).json({cartoes});
         console.log('cartoes devolvidos com sucesso');
