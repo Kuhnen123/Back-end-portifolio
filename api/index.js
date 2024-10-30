@@ -95,33 +95,80 @@ app.post('/cartoes', (req, res) => {
         }
     }
 
-    cartoes.push({nome: nome, valor: valor, img: img});
-    console.log(cartoes);
-    res.status(201).json({ mensagem: 'Deu boa o post',});
 });
 
 app.delete('/cartoes/:id', async (req, res) => {
-    const { id } = req.params; 
+    const id = req.body.cartoes; 
+
+    if (!id) {
+        res.status(400).json({ mensagem: 'ID do cartão não fornecido' });
+        console.log('ID do cartão não fornecido');
+    }else{
 
     try {
-        await db.collection('cartoes').doc('cartoes').delete(); 
-        console.log(`Cartão ${id} deletado com sucesso`);
-        res.status(200).json({ mensagem: `Deu boa o delete ${id}` });
+        const cartaoRef = db.collection('cartoes').doc(id);
+        const doc = await cartaoRef.get();
+
+        if (!doc.exists) {
+            res.status(404).json({ mensagem: 'Cartão com ID'+ cartoes + 'não encontrado' });
+            console.log('Cartão não encontrado');
+        } else {
+            await cartaoRef.delete();
+            res.status(200).json({ mensagem: 'Cartão com ID ' + id + ' deletado' });
+            console.log('Cartão com ID ' + id + ' deletado');
+         
+        }
     } catch (e) {
-        console.error(`Erro ao deletar o cartão: ${e}`);
-        res.status(500).json({ mensagem: `Erro ao deletar cartão: ${e}` });
+        console.error('Erro ao deletar o cartão: ', e);
+        res.status(500).json({ mensagem: 'Erro ao deletar cartão: ' + e });
     }
+}
 });
 
-
-app.put('/cartoes', (req, res) => {
+app.put('/cartoes', async (req, res) => {
     const {nome, valor, id, img} = req.body;
+    if (!id) {
+        res.status(400).json({ mensagem: 'ID do cartão não fornecido' });
+        console.log('cartão não atualizado, ID invalido!');
+        
+    }else{
+        try {
+            const cartaoRef = db.collection('cartoes').doc(id);
+            const doc = await cartaoRef.get();
+            if (!doc.exists) {
+                res.status(404).json({ mensagem: 'Cartão com ID ' + id + ' não encontrado' });
+                console.log('Cartão não encontrado');
+            } else {
+                const dadosAtualizados = {
+                    
+                };
+                if (nome) {
+                    dadosAtualizados.nome = nome;
+                }
+                if (valor) {
+                    dadosAtualizados.valor = valor;
+                }
+                if (img) {
+                    dadosAtualizados.img = img;
+                }
+                await cartaoRef.update(dadosAtualizados);
+                res.status(200).json({ mensagem: 'Cartão com ID ' + id + ' atualizado' });
+                console.log('Cartão com ID ' + id + ' atualizado');
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar o cartão: ', e);
+            res.status(500).json({ mensagem: 'Erro ao atualizar cartão: ' + e });
+        }
+    }
 
-    cartoes[id] = {nome: nome, valor: valor, img: img};
-    console.log(cartoes);
-    res.status(201).json({ mensagem: 'Deu boa o put' });
+
+    // cartoes[id] = {nome: nome, valor: valor, img: img};
+    // console.log(cartoes);
+    // res.status(201).json({ mensagem: 'Deu boa o put' });
 });
 
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
-});
+module.express = app;
+
+// app.listen(3000, () => {
+//     console.log(`Rodando`);
+//  });
