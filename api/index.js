@@ -3,25 +3,25 @@ const cors = require('cors');
 const admin = require('firebase-admin');
 
 const serviceAccount = {
-    type: process.env.TYPE,
-    project_id: process.env.PROJECT_ID,
-    private_key_id: process.env.PRIVATE_KEY_ID,
-    private_key: process.env.PRIVATE_KEY,
-    client_email: process.env.CLIENT_EMAIL,
-    client_id: process.env.CLIENT_ID,
-    auth_uri: process.env.AUTH_URI,
-    token_uri: process.env.TOKEN_URI,
-    admin_provider_x509_cert_url: process.env.AUTH_PROVIDER_X509_CERT_URL,
-    client_x509_cert_url: process.env.CLIENT_X509_CERT_URL,
-}
-
+    type: "service_account",
+    project_id: "bdprojetos-2dac4",
+    private_key_id: "ab045dfc9321111094e40c09fc0fa8329b420c30",
+    private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDB9o7ZcZybBc+k\nnvkwC/Bskf5ql3gPfb2g2L9DjI2J2b4uvHyExni3lRJnSHDLf39ZUibpL9I1bhFE\n7SxFglFL5hBDjimiV0zcZ6W1Ab6PDHNWWw8Kr8aD4HuCI9GpuCCWgwtyabGJ1Kcs\npaZiNAJYViC+ndmu2X1tAHfkz1qGGeyk+l0OkQxIxLcgnpMnZU5T6+Nwf5hsyuwj\nIIj/FUEaltD5Xb791kPwYbFkG02MHNR866X4vJgTmRoS+LmKGhy6K4syvA0dO1FK\nzwMv43fJjDhuPTwk3bFMhJs+Zy4mSkPtr9+KJtXYg1iEXlUx/DsgEu5duKS+6vum\nwCcrIzJDAgMBAAECggEABVAR4QF188ZIrG6RG11NJ3qNciSWLJdAar4oT84/3dV0\n5zlqqbjFlRwd5ge7oZjrVCpMl/K84Pf6Vh2u93QJ2QV2Ty6Yk/J5nJUXZ11V95VO\nOKcDqVwsmLxWqOplQEi9IvirVBkMCV8lrLKyDrRaluPV2SxgSldGH1NPdWXhycfl\nl3WlqInLb9jwN1YdO7/WmdprwVVTv1iKGV7tAdAio6gVDMnf5Ou+qI3cED+yenSr\nOu+hvZ6yF9yI6YmQ54q7+j4gJmJEkDPFOb7FjDiIsfVDZz9UKnVbbrSCiYyGpOlo\ngi3Q28ka2mcNZKiLWafuAH3KQvD58qNTvRl3CgbUsQKBgQDlQSFL2NRfE9+6CDbm\nXcqXz65Slz/ZKkDyS0T2UTPU+jsaen0IkrkjB37hCqoVtmNUNT0w4he62Sz03/IA\nDIgx6Jup/UbKB29InU65GTL/Ao7I7J8f/WOBBj1ChsmnhNqRwBxnIuzvxTGlWFDO\nMm6EojcsVIG/o+HEUOisiNZ7EwKBgQDYl2yx63GU22VM6wH713hZ1dMmEYaOUeK+\nmfJsHKAy+8o03eyUiOnvMiR0dtqpD1xr1921IJ8dd1Anlbrkg9M3Py+s/29Hqs5M\nJP6r+j29SdrxkMXEnyq92WsJMHRTpFozpEDD4wDDcta95RWkAVMmFNAObYy71QSS\nBHtgLlGiEQKBgQDEb3EzR0B5k1LhWUaJT5ZXTEmnVRgNYUozElGt6VhLRno8LvZR\n0T63iCWseHHSluw3bELZTvFcVdhSnk0Cw7ozYYd4OaBdXc953ehla/UpUqy79xxF\n0d1f4dO93DaPxqNtvbnYmbGBpWrrrWfXtpjCJyi1YFeouKiriVRE+h8lZwKBgATj\nTfGp9ZM9bEjTGOVdFHs6hxxZ0uaNVIemo8Dq2HauFf8hbwBfIqBiSk5SjFa6YQSS\nB4/Z351jnux1xZT4oKCjjWjjDtjYMvWm9BRfflsyOn2vHbd1PBqyuGapsEZe9CYs\nM8X37oF6qvv4Gofr+7tlRti8giuPAB5neX1PLkpxAoGAb7UxdeWUdWRJs81CG4D8\n7IjJCPSbKfGZlDKLKryYjqdMo5Yvn2VTqa0L2LvJkyKs0cqGx0+kVtEUglPI1flI\nkYxunXBXaiRggjTnmmC7UeGsOtV+mAoy9w1/Me8xGwX4E0FDfXdLUn9A9IXk1MY/\natKbEB7XCoHnH6i+AxQgqAs=\n-----END PRIVATE KEY-----\n",
+    client_email: "firebase-adminsdk-qzz52@bdprojetos-2dac4.iam.gserviceaccount.com",
+    client_id: "110815710105612455512",
+    auth_uri: "https://accounts.google.com/o/oauth2/auth",
+    token_uri: "https://oauth2.googleapis.com/token",
+    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+    client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-qzz52%40bdprojetos-2dac4.iam.gserviceaccount.com",
+    universe_domain: "googleapis.com"
+  }
+  
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
   });
 
 const db = admin.firestore();
 const app = express();
-const port = 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -54,8 +54,7 @@ app.get('/cartoes', async (req, res) => {
     try {
         const response = await db.collection('cartoes').get();
         const cartoes = response.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
+            id: doc.id, ...doc.data()
         }));
         
         console.log(cartoes);
@@ -70,6 +69,31 @@ app.get('/cartoes', async (req, res) => {
 
 app.post('/cartoes', (req, res) => {
     const{nome, valor, img} = req.body;
+    if (!nome ) {
+        res.status(400).json({ mensagem: 'nome da linguagem do cartao invalido' });
+    }else if (!valor) {
+        res.status(400).json({ mensagem: 'valor do cartão invalido' });
+
+    }else if (!img) {
+        res.status(400).json({ mensagem: 'imagem do cartão invalido' });
+        console.log('Novo cartão não cadastrado, imagem invalida!');
+    }else{
+        try{
+            const response = db.collection('cartoes').add({
+            nome,
+            valor,
+            img,
+            criadoEm: admin.firestore.FieldValue.serverTimestamp()
+        
+        });
+        res.status(201).json({ mensagem: 'Cartão cadastrado com sucesso!', id: novoCartaoRef});
+            console.log('Novo cartão cadastrado com ID', novoCartaoRef.id);
+        } catch (error) {
+            console.error('Erro ao cartão: ', error);
+            res.status(500).json({ mensagem: 'Erro ao cadastrar cartão: ' });
+            
+        }
+    }
 
     cartoes.push({nome: nome, valor: valor, img: img});
     console.log(cartoes);
