@@ -167,7 +167,7 @@ app.put('/cartoes', async (req, res) => {
     // res.status(201).json({ mensagem: 'Deu boa o put' });
 });
 
-module.express = app;
+module.exports = app;
 
 // app.listen(3000, () => {
 //     console.log(`Rodando`);
