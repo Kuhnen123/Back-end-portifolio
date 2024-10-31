@@ -96,7 +96,7 @@ app.post('/cartoes', (req, res) => {
 
 });
 
-app.delete('/cartoes/:id', async (req, res) => {
+app.delete('/cartoes', async (req, res) => {
     const id = req.body.cartoes; 
 
     if (!id) {
